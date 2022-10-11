@@ -12,3 +12,18 @@ output "cluster-credentials-command" {
   value = "az aks get-credentials --resource-group ${azurerm_resource_group.rg.name} --name ${azurerm_kubernetes_cluster.aks_cluster.name}"
   description = "Command to get the cluster's credentials with az cli"
 }
+
+output "cluster-id" {
+  value = "az aks show -g ${azurerm_resource_group.rg.name} -n ${azurerm_kubernetes_cluster.aks_cluster.name} --query @.id -o tsv"
+  description = "ID of the AKS cluster created by this module"
+}
+
+output "resource-group-name" {
+  value = "${azurerm_resource_group.rg.name}"
+  description = "Resource group that holds the AKS cluster"
+}
+
+output "cluster-name" {
+  value = "${azurerm_kubernetes_cluster.aks_cluster.name}"
+  description = "Name of the AKS cluster"
+}
