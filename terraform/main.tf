@@ -86,6 +86,12 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   }
 }
 
+resource "azurerm_role_assignment" "network_contributor" {
+  scope                = azurerm_virtual_network.vnet.id
+  role_definition_name = "Network Contributor"
+  principal_id         = azurerm_user_assigned_identity.aks_identity.principal_id
+}
+
 ## BASTION HOST RESOURCES
 
 resource "azurerm_public_ip" "public_ip" {
